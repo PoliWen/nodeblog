@@ -20,6 +20,7 @@ const app = http.createServer((req, res) => {
         query
     }
     if (req.method == 'GET') {
+        console.log(resData)
         res.end(JSON.stringify(resData))
     }
     // 处理post请求的数据
@@ -30,8 +31,8 @@ const app = http.createServer((req, res) => {
         })
         req.on('end', () => {
             resData.postData = postData
-            console.log(postData)
-            res.end(JSON.stringify(resData))
+            console.log(resData)
+            res.end("{'name':'wxl'}")
         })
         // git提交
     }
