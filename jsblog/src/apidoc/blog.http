@@ -1,0 +1,52 @@
+### 添加博客的接口文档
+
+### 获取博客列表页
+GET http://127.0.0.1:8088/api/blog/list?author=wxl&keywords=123 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "wxl",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT",
+    "age":28
+}
+
+
+### 获取博客详情
+GET http://127.0.0.1:8088/api/blog/detail?name=wxl&age=123 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "wxl",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT",
+    "age":28
+}
+
+### 添加博客
+POST http://127.0.0.1:8088/api/blog/new?name=wxl&age=123 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "post",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT",
+    "age":28
+}
+
+### 更新博客
+POST http://127.0.0.1:8088/api/blog/update?id=3 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "wxl",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT",
+    "age":28
+}
+
+### 删除博客
+POST http://127.0.0.1:8088/api/blog/del?id=3 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "wxl",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT",
+    "age":28
+}

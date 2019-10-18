@@ -1,0 +1,11 @@
+### 添加博客的接口文档
+
+### 获取博客列表页
+POST http://127.0.0.1:8088/api/user/login?name=wxl&age=123 HTTP/1.1
+content-type: application/json
+
+{
+    "user":"张三",
+    "psw":"123"
+}
+

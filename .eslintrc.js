@@ -6,7 +6,7 @@ module.exports = {
     parser: 'babel-eslint',
     parserOptions: {
         sourceType: 'module',
-        "allowImportExportEverywhere": true  //ignore eslint error: 'import' and 'export' may only appear at the top level
+        "allowImportExportEverywhere": true //ignore eslint error: 'import' and 'export' may only appear at the top level
     },
     env: {
         browser: true,
@@ -66,7 +66,7 @@ module.exports = {
         }],
         'new-cap': [2, {
             'newIsCap': true,
-            'capIsNew': false
+            'capIsNew': true
         }],
         'new-parens': 2,
         'no-array-constructor': 2,

@@ -4,7 +4,9 @@ const ignoreDir = ['.git', '.vscode', 'node_modules']
 
 // 你就可以写一个批量添加.gitkeep的文件
 function addGitkeep(url) {
-    fs.readdir(url, { withFileTypes: true }, (err, files) => {
+    fs.readdir(url, {
+        withFileTypes: true
+    }, (err, files) => {
         err && console.log(err)
         // 该目录下没有文件
         if (!files.length) {
@@ -23,7 +25,9 @@ function addGitkeep(url) {
 
 // 写一个批量删除.gitkeep的方法
 function removeGitkeep(url) {
-    fs.readdir(url, { withFileTypes: true }, (err, files) => {
+    fs.readdir(url, {
+        withFileTypes: true
+    }, (err, files) => {
         err && console.log(err)
         // 该目录只有一个文件，且文件名==.gitkeep
         if (!files.length) {
