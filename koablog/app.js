@@ -12,7 +12,8 @@ const app = http.createServer((req, res) => {
     console.log(req.method)
     const path = url.split('?')[0]
     const query = querystring.parse(url.split('?')[1])
-    res.setHeader('Content-type', 'application/json')
+    // res.setHeader('Content-Type', 'application/json')
+    res.setHeader('Content-Type', 'application/json')
     const resData = {
         method,
         url,
@@ -30,9 +31,10 @@ const app = http.createServer((req, res) => {
             postData += data.toString()
         })
         req.on('end', () => {
-            resData.postData = postData
+            // resData.postData = postData
             console.log(resData)
-            res.end("{'name':'wxl'}")
+            res.write('cnmbaaaa')
+            //res.end(JSON.stringify(resData))
         })
         // git提交
     }
@@ -43,5 +45,3 @@ const app = http.createServer((req, res) => {
 app.listen(port, hostName, () => {
     console.log(`server is runing success at http://${hostName}:${port}`)
 })
-
-// xxxxx000

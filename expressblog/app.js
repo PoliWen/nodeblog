@@ -32,7 +32,8 @@ const app = http.createServer((req, res) => {
         req.on('end', () => {
             resData.postData = postData
             console.log(resData)
-            res.end("{'name':'wxl'}")
+            res.write('nmfsjfkdsjfks')
+            res.end('nmfjdkasjfjksd')
         })
         // git提交
     }

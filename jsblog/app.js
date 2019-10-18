@@ -32,12 +32,13 @@ const app = http.createServer((req, res) => {
         req.on('end', () => {
             resData.postData = postData
             console.log(resData)
-            res.end("{'name':'wxl'}")
+            res.end(JSON.stringify(resData))
         })
         // git提交
     }
     // 处理静态页面返回
-    res.end()
+    // 多了这个鬼，导致代码发送获取不到post数据，但是为什么发送get请求可以呢，困惑了大半天的bug，哎，写代码要严谨
+    // res.end()
 })
 
 app.listen(port, hostName, () => {
