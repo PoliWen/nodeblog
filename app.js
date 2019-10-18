@@ -12,7 +12,7 @@ const app = http.createServer((req, res) => {
     console.log(req.method)
     const path = url.split('?')[0]
     const query = querystring.parse(url.split('?')[1])
-    res.setHeader('Content-type', 'application/json')
+    res.setHeader('Content-Type', 'application/json')
     const resData = {
         method,
         url,
@@ -32,14 +32,12 @@ const app = http.createServer((req, res) => {
         req.on('end', () => {
             resData.postData = postData
             console.log(resData)
-            res.end("{'name':'wxl'}")
+            res.end(JSON.stringify(resData))
         })
         // git提交
     }
     // 处理静态页面返回
-    res.end()
 })
-
 app.listen(port, hostName, () => {
     console.log(`server is runing success at http://${hostName}:${port}`)
 })
