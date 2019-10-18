@@ -1,15 +1,23 @@
 {
-  "name": "nodeblog",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app.js"
-  },
-  "author": "kingw",
-  "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^1.19.4"
-  }
+    "name": "nodeblog",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "nodemon jsblog\/app.js",
+        "addgitkeep": "node addgitkeep.js"
+    },
+    "author": "kingw",
+    "license": "ISC",
+    "devDependencies": {
+        "babel-eslint": "^10.0.3",
+        "nodemon": "^1.19.4",
+        "eslint": "^6.5.1",
+        "eslint-friendly-formatter": "^4.0.1",
+        "eslint-loader": "^3.0.2",
+        "eslint-plugin-html": "^6.0.0",
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-stage-0": "^6.24.1"
+    }
 }

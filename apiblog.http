@@ -1,0 +1,22 @@
+POST http://127.0.0.1:8088/api/post/update?id=1&name=wxl HTTP/1.1
+content-type: application/json
+
+{
+    "name": "wxl",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT",
+    "age":28
+}
+
+###
+
+GET https://example.com/topics/1 HTTP/1.1
+
+###
+
+POST https://example.com/comments HTTP/1.1
+content-type: application/json
+
+{
+    "name": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
