@@ -1,49 +1,64 @@
-const getList = (author, keywords) => {
-    return [{
-        id: '1',
-        title: '标题一',
-        content: '内容一',
-        creatTime: '1571413473790',
-        author: '张三'
-    },
-    {
-        id: '2',
-        title: '标题二',
-        content: '内容二',
-        creatTime: '1571413473790',
-        author: '李四'
-    },
-    {
-        id: '3',
-        title: '标题三',
-        content: '内容三',
-        creatTime: '1571413473790',
-        author: '王五'
+const { mysqlExec } = require('../utils/db.js')
+// 获取博客列表
+const getList = (author, keyword) => {
+    let sql = `select * from blogs where 1=1`
+    if (author) {
+        sql += ` and author='${author}'`
     }
-    ]
+    if (keyword) {
+        sql += ` and title like '%${keyword}%'`
+    }
+    sql += ` order by createtime desc;`
+    console.log(sql)
+    // 返回的是一个promise
+    return mysqlExec(sql)
 }
+// 获取博客详情
 const getDetail = (id) => {
-    return {
-        id: '3',
-        title: '标题三',
-        content: '内容三',
-        creatTime: '1571413473790',
-        author: '王五'
-    }
+    const sql = `select * from blogs where id='${id}';`
+    console.log(sql)
+    return mysqlExec(sql).then((rows) => {
+        return rows[0]
+    })
 }
+// 新建一篇博客
 const newBlog = (data) => {
-    console.log(data)
-    return {
-        id: 2
-    }
+    const { title, content, author } = data
+    const createtime = Date.now()
+    const sql = `insert into blogs (title,content,createtime,author) values ('${title}','${content}','${createtime}','${author}');`
+    console.log(sql)
+    return mysqlExec(sql).then((insertData) => {
+        console.log('insertData', insertData)
+        return {
+            id: insertData.insertId
+        }
+    })
 }
+// 更新一篇博客
 const upDateBlog = (id, data) => {
-    console.log(data)
-    return true
+    const { title, content, author } = data
+    const createtime = Date.now()
+    const sql = `update blogs set title='${title}',content='${content}',author='${author}',createtime='${createtime}' where id='${id}';`
+    console.log(sql)
+    return mysqlExec(sql).then((updateDate) => {
+        console.log('updateData', updateDate)
+        if (updateDate.affectedRows > 0) {
+            return true
+        }
+        return false
+    })
 }
-const delBlog = (id) => {
-    console.log(data)
-    return true
+// 删除一篇博客
+const delBlog = (id, author) => {
+    const sql = `delete from blogs where id='${id}' and author='${author}';`
+    console.log(sql)
+    return mysqlExec(sql).then((delDate) => {
+        console.log('delDate', delDate)
+        if (delDate.affectedRows > 0) {
+            return true
+        }
+        return false
+    })
 }
 module.exports = {
     getList,

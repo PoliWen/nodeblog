@@ -1,34 +1,21 @@
 ### 添加博客的接口文档
 
 ### 获取博客列表页
-GET http://127.0.0.1:8088/api/blog/list?author=wxl&keywords=123 HTTP/1.1
+GET http://127.0.0.1:8088/api/blog/list HTTP/1.1
 content-type: application/json
-
-{
-    "name": "wxl",
-    "time": "Wed, 21 Oct 2015 18:27:50 GMT",
-    "age":28
-}
-
 
 ### 获取博客详情
-GET http://127.0.0.1:8088/api/blog/detail?name=wxl&age=123 HTTP/1.1
+GET http://127.0.0.1:8088/api/blog/detail?id=3 HTTP/1.1
 content-type: application/json
-
-{
-    "name": "wxl",
-    "time": "Wed, 21 Oct 2015 18:27:50 GMT",
-    "age":28
-}
 
 ### 添加博客
-POST http://127.0.0.1:8088/api/blog/new?name=wxl&age=123 HTTP/1.1
+POST http://127.0.0.1:8088/api/blog/new HTTP/1.1
 content-type: application/json
 
 {
-    "name": "post",
-    "time": "Wed, 21 Oct 2015 18:27:50 GMT",
-    "age":28
+    "title": "新添加的博客标题",
+    "content": "新添加一条博客，新添加一条博客",
+    "author":"张三"
 }
 
 ### 更新博客
@@ -36,17 +23,15 @@ POST http://127.0.0.1:8088/api/blog/update?id=3 HTTP/1.1
 content-type: application/json
 
 {
-    "name": "wxl",
-    "time": "Wed, 21 Oct 2015 18:27:50 GMT",
-    "age":28
+    "title": "新添加的博客标题AAA",
+    "content": "新添加一条博客，新添加一条博客AAA",
+    "author":"张三"
 }
 
 ### 删除博客
-POST http://127.0.0.1:8088/api/blog/del?id=3 HTTP/1.1
+POST http://127.0.0.1:8088/api/blog/del?id=5 HTTP/1.1
 content-type: application/json
 
 {
-    "name": "wxl",
-    "time": "Wed, 21 Oct 2015 18:27:50 GMT",
-    "age":28
+    "author":"张三"
 }

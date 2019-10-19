@@ -34,7 +34,7 @@ const app = http.createServer((req, res) => {
             // resData.postData = postData
             console.log(resData)
             res.write('cnmbaaaa')
-            //res.end(JSON.stringify(resData))
+            // res.end(JSON.stringify(resData))
         })
         // git提交
     }
