@@ -2,7 +2,9 @@
 const mysql = require('mysql')
 
 // 数据库连接配置
-const { MYSQL_CONF } = require('../config/dbconf.js')
+const {
+    MYSQL_CONF
+} = require('../config/dbconf.js')
 
 // 创建一个连接
 const con = mysql.createConnection(MYSQL_CONF)
@@ -23,6 +25,6 @@ function mysqlExec(sql) {
     return promise
 }
 module.exports = {
-    mysqlExec
+    mysqlExec,
+    escape: mysql.escape
 }
-

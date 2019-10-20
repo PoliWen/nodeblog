@@ -9,6 +9,11 @@ const {
     SuccessModel,
     ErrorModel
 } = require('../model/resModel.js')
+const loginCheck = function(req) {
+    if (!req.session.username) {
+        return Promise.resolve(new ErrorModel('您未登录，请先登录'))
+    }
+}
 const handleBlogRouter = (req, res) => {
     const method = req.method
     const path = req.path
@@ -37,7 +42,13 @@ const handleBlogRouter = (req, res) => {
     }
     // 新建一篇博客接口
     if (method === 'POST' && path === '/api/blog/new') {
-        const result = newBlog(req.body)
+        const loginCheckResult = loginCheck(req)
+        // 有值说明登录失败
+        if (loginCheckResult) {
+            return loginCheck(req)
+        }
+        const author = req.session.realname
+        const result = newBlog(req.body, author)
         return result.then((newData) => {
             if (newData) {
                 return new SuccessModel(newData)
@@ -48,7 +59,13 @@ const handleBlogRouter = (req, res) => {
     }
     // 更新一篇博客接口
     if (method === 'POST' && path === '/api/blog/update') {
-        const result = upDateBlog(id, req.body)
+        const loginCheckResult = loginCheck(req)
+        // 有值说明登录失败
+        if (loginCheckResult) {
+            return loginCheck(req)
+        }
+        const author = req.session.realname
+        const result = upDateBlog(id, req.body, author)
         return result.then((updateData) => {
             if (updateData) {
                 return new SuccessModel('成功更新一篇博客')
@@ -59,13 +76,19 @@ const handleBlogRouter = (req, res) => {
     }
     // 删除一篇博客接口
     if (method === 'POST' && path === '/api/blog/del') {
-        const author = '张三'
+        const loginCheckResult = loginCheck(req)
+        // 有值说明登录失败
+        if (loginCheckResult) {
+            return loginCheck(req)
+        }
+        const author = req.session.realname
+        const id = req.query.id
         const result = delBlog(id, author)
         return result.then((delData) => {
             if (delData) {
                 return new SuccessModel('成功删除一篇博客')
             } else {
-                return new ErrorModel('添加博客失败')
+                return new ErrorModel('删除失败')
             }
         })
     }

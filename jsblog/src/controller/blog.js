@@ -1,4 +1,7 @@
-const { mysqlExec } = require('../utils/db.js')
+const {
+    mysqlExec
+} = require('../utils/db.js')
+const xss = require('xss')
 // 获取博客列表
 const getList = (author, keyword) => {
     let sql = `select * from blogs where 1=1`
@@ -22,10 +25,14 @@ const getDetail = (id) => {
     })
 }
 // 新建一篇博客
-const newBlog = (data) => {
-    const { title, content, author } = data
+const newBlog = (data, author) => {
+    const {
+        title,
+        content
+    } = data
+
     const createtime = Date.now()
-    const sql = `insert into blogs (title,content,createtime,author) values ('${title}','${content}','${createtime}','${author}');`
+    const sql = `insert into blogs (title,content,createtime,author) values ('${xss(title)}','${xss(content)}','${createtime}','${author}');`
     console.log(sql)
     return mysqlExec(sql).then((insertData) => {
         console.log('insertData', insertData)
@@ -35,10 +42,13 @@ const newBlog = (data) => {
     })
 }
 // 更新一篇博客
-const upDateBlog = (id, data) => {
-    const { title, content, author } = data
+const upDateBlog = (id, data, author) => {
+    const {
+        title,
+        content
+    } = data
     const createtime = Date.now()
-    const sql = `update blogs set title='${title}',content='${content}',author='${author}',createtime='${createtime}' where id='${id}';`
+    const sql = `update blogs set title='${xss(title)}',content='${xss(content)}',author='${author}',createtime='${createtime}' where id='${id}';`
     console.log(sql)
     return mysqlExec(sql).then((updateDate) => {
         console.log('updateData', updateDate)

@@ -22,7 +22,14 @@ const getPostData = (req) => {
         // git提交
     })
 }
-
+// 设置cookie过期时间
+function getCookieExpires() {
+    const d = new Date()
+    d.setTime(d.getTime() + (20 * 60 * 60 * 1000))
+    console.log('d.toGMTString() is', d.toGMTString())
+    return d.toGMTString()
+}
 module.exports = {
-    getPostData
+    getPostData,
+    getCookieExpires
 }
