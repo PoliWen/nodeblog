@@ -6,6 +6,7 @@ const {
     getPostData,
     getCookieExpires
 } = require('./src/utils/common.js')
+const { access } = require('./src/utils/log.js')
 // 设置一个session变量
 const SESSION_DATA = {} // session在程序重启的时候会丢失
 const serverHandle = (req, res) => {
@@ -14,6 +15,7 @@ const serverHandle = (req, res) => {
     req.path = url.split('?')[0]
     req.query = querystring.parse(url.split('?')[1])
     // 返回json文件
+    access(`${req.method}--${req.url}--${req.headers['user-agent']}--${new Date().toGMTString()}`)
     res.setHeader('Content-type', 'application/json')
     // 服务端如何获取cookie
     req.cookie = {}
@@ -41,7 +43,7 @@ const serverHandle = (req, res) => {
         }
     } else {
         needSetcookie = true
-        userId = `${Date.now()}_${Math.random()}`
+        userId = `${Date.now()} _${Math.random()} `
         SESSION_DATA[userId] = {}
     }
     req.session = SESSION_DATA[userId]
@@ -63,7 +65,7 @@ const serverHandle = (req, res) => {
             blogResult.then((blogData) => {
                 if (needSetcookie) {
                     console.log('userId', userId)
-                    res.setHeader('Set-Cookie', `userid=${userId}; path=/; httpOnly; expires=${getCookieExpires()}`)
+                    res.setHeader('Set-Cookie', `userid = ${userId}; path = /; httpOnly; expires=${getCookieExpires()}`)
                 }
                 res.end(
                     JSON.stringify(blogData)

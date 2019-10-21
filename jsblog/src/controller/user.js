@@ -12,7 +12,7 @@ const checkLogin = (username, password) => {
     console.log('password', password)
     const sql = `select * from users where username=${username} and password='${password}';`
     return mysqlExec(sql).then((userData) => {
-        // 如果能够查出来来数据就说明账号正确
+        // 如果能够查出来数据就说明账号正确
         return userData[0] || {}
     })
 }
