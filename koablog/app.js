@@ -1,47 +1,44 @@
-const http = require('http')
-const querystring = require('querystring')
-const {
-    hostName,
-    port
-} = require('./src/config/config.js')
+const Koa = require('koa')
+const app = new Koa()
+const views = require('koa-views')
+const json = require('koa-json')
+const onerror = require('koa-onerror')
+const bodyparser = require('koa-bodyparser')
+const logger = require('koa-logger')
 
-const app = http.createServer((req, res) => {
-    // 处理get请求的数据
-    const method = req.method
-    const url = req.url
-    console.log(req.method)
-    const path = url.split('?')[0]
-    const query = querystring.parse(url.split('?')[1])
-    // res.setHeader('Content-Type', 'application/json')
-    res.setHeader('Content-Type', 'application/json')
-    const resData = {
-        method,
-        url,
-        path,
-        query
-    }
-    if (req.method == 'GET') {
-        console.log(resData)
-        res.end(JSON.stringify(resData))
-    }
-    // 处理post请求的数据
-    if (req.method == 'POST') {
-        let postData = ''
-        req.on('data', (data) => {
-            postData += data.toString()
-        })
-        req.on('end', () => {
-            // resData.postData = postData
-            console.log(resData)
-            res.write('cnmbaaaa')
-            // res.end(JSON.stringify(resData))
-        })
-        // git提交
-    }
-    // 处理静态页面返回
-    res.end()
+const index = require('./routes/index')
+const users = require('./routes/users')
+
+// error handler
+onerror(app)
+
+// middlewares
+app.use(bodyparser({
+    enableTypes: ['json', 'form', 'text']
+}))
+app.use(json())
+app.use(logger())
+app.use(require('koa-static')(__dirname + '/public'))
+
+app.use(views(__dirname + '/views', {
+    extension: 'pug'
+}))
+
+// logger
+app.use(async(ctx, next) => {
+    const start = new Date()
+    await next()
+    const ms = new Date() - start
+    console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
-app.listen(port, hostName, () => {
-    console.log(`server is runing success at http://${hostName}:${port}`)
+// routes
+app.use(index.routes(), index.allowedMethods())
+app.use(users.routes(), users.allowedMethods())
+
+// error-handling
+app.on('error', (err, ctx) => {
+    console.error('server error', err, ctx)
 })
+
+module.exports = app
