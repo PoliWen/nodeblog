@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "start": "nodemon cross NODE_ENV=dev node bin/www",
+        "start": "cross-env PORT=8000 NODE_ENV=dev nodemon bin/www",
         "dev": "./node_modules/.bin/nodemon bin/www",
         "prd": "pm2 start bin/www",
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,6 +22,8 @@
         "pug": "^2.0.3"
     },
     "devDependencies": {
+        "koa-generic-session": "^2.0.1",
+        "koa-redis": "^4.0.0",
         "nodemon": "^1.19.1"
     }
 }

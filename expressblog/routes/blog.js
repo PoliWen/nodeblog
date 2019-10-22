@@ -11,7 +11,9 @@ const {
     SuccessModel,
     ErrorModel
 } = require('../model/resModel.js')
-const { checkLogin } = require('../midleware/index.js')
+const {
+    checkLogin
+} = require('../midleware/index.js')
 console.log('checkLogin', checkLogin)
 // 获取博客列表接口
 router.use('/list', (req, res) => {
