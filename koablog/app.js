@@ -12,6 +12,10 @@ const userRouter = require('./routes/user')
 const blogRouter = require('./routes/blog')
 const session = require('koa-generic-session')
 const redisStore = require('koa-redis')
+// 日志处理插件
+const fs = require('fs')
+const path = require('path')
+const morgan = require('koa-morgan')
 // error handler
 onerror(app)
 
@@ -21,6 +25,12 @@ app.use(bodyparser({
 }))
 app.use(json())
 app.use(logger())
+
+// 写入日志
+app.use(morgan('dev'))
+const accessLog = fs.createWriteStream(path.join(__dirname, 'log', 'access.log'), { flags: 'a' })
+app.use(morgan('combined', { stream: accessLog })) // 打印到acesslog
+
 app.use(require('koa-static')(__dirname + '/public'))
 
 app.use(views(__dirname + '/views', {
@@ -33,6 +43,7 @@ app.use(async(ctx, next) => {
     await next()
     const ms = new Date() - start
     console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
+    console.error('error', Date.now())
 })
 
 // routes
@@ -51,6 +62,7 @@ app.use(session({
         all: '127.0.0.1:6379'
     })
 }))
+
 app.use(userRouter.routes(), userRouter.allowedMethods())
 app.use(blogRouter.routes(), blogRouter.allowedMethods())
 // error-handling

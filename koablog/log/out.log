@@ -1,0 +1,71 @@
+checkLogin async function(ctx, next) {
+    if (ctx.session.username) {
+        // 设置了session值说明登录成功了
+        await next()
+        return
+    }
+    ctx.body = new ErrorModel('请先登录')
+}
+http://127.0.0.18000
+  <-- GET /api/blog/list
+select * from blogs where 1=1 order by createtime desc;
+GET /api/blog/list - 14ms
+[0mGET /api/blog/list [32m200 [0m70.752 ms - 2647[0m
+  --> GET /api/blog/list 200 78ms 2.13kb
+  <-- GET /api/blog/list
+select * from blogs where 1=1 order by createtime desc;
+GET /api/blog/list - 6ms
+[0mGET /api/blog/list [32m200 [0m9.546 ms - 2647[0m
+  --> GET /api/blog/list 200 11ms 2.13kb
+  <-- GET /api/blog/detail?id=12
+select * from blogs where id='12';
+GET /api/blog/detail?id=12 - 4ms
+[0mGET /api/blog/detail?id=12 [32m200 [0m10.262 ms - 253[0m
+  --> GET /api/blog/detail?id=12 200 12ms 211b
+  <-- POST /api/user/login
+password acd5cb268aba50e5c457587b6c5e6edf
+session { cookie:
+   { path: '/',
+     httpOnly: true,
+     maxAge: 86400000,
+     overwrite: true,
+     signed: true },
+  username: 'zhangsan',
+  realname: '张三' }
+POST /api/user/login - 19ms
+[0mPOST /api/user/login [32m200 [0m20.181 ms - 174[0m
+  --> POST /api/user/login 200 22ms 134b
+  <-- GET /api/blog/list?isadmin=1
+select * from blogs where 1=1 order by createtime desc;
+GET /api/blog/list?isadmin=1 - 3ms
+[0mGET /api/blog/list?isadmin=1 [32m200 [0m6.988 ms - 2647[0m
+  --> GET /api/blog/list?isadmin=1 200 9ms 2.13kb
+  <-- POST /api/blog/del?id=22
+author 张三
+delete from blogs where id='22' and author='张三';
+POST /api/blog/del?id=22 - 4ms
+[0mPOST /api/blog/del?id=22 [32m200 [0m3.741 ms - 51[0m
+  --> POST /api/blog/del?id=22 200 4ms 42b
+  <-- GET /api/blog/list?isadmin=1
+select * from blogs where 1=1 order by createtime desc;
+GET /api/blog/list?isadmin=1 - 7ms
+[0mGET /api/blog/list?isadmin=1 [32m200 [0m8.030 ms - 2464[0m
+  --> GET /api/blog/list?isadmin=1 200 9ms 2kb
+checkLogin async function(ctx, next) {
+    if (ctx.session.username) {
+        // 设置了session值说明登录成功了
+        await next()
+        return
+    }
+    ctx.body = new ErrorModel('请先登录')
+}
+http://127.0.0.18000
+checkLogin async function(ctx, next) {
+    if (ctx.session.username) {
+        // 设置了session值说明登录成功了
+        await next()
+        return
+    }
+    ctx.body = new ErrorModel('请先登录')
+}
+http://127.0.0.18000

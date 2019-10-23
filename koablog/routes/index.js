@@ -1,6 +1,9 @@
 const router = require('koa-router')()
 
 router.get('/', async(ctx, next) => {
+    if (ctx.query.err) {
+        throw ('出错了')
+    }
     await ctx.render('index', {
         title: 'Hello Koa 2!'
     })
