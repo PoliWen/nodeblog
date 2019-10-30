@@ -69,3 +69,12 @@ checkLogin async function(ctx, next) {
     ctx.body = new ErrorModel('请先登录')
 }
 http://127.0.0.18000
+checkLogin async function(ctx, next) {
+    if (ctx.session.username) {
+        // 设置了session值说明登录成功了
+        await next()
+        return
+    }
+    ctx.body = new ErrorModel('请先登录')
+}
+http://127.0.0.18000
