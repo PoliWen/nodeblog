@@ -1,3 +1,9 @@
+/*
+ * @Descripttion:
+ * @version:
+ * @Author: kinw
+ * @Date: 2019-10-22 23:22:12
+ */
 // 文件操作模块
 const fs = require('fs')
 const path = require('path')

@@ -16,11 +16,17 @@ var app = express()
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'jade')
 app.use(logger('dev'))
-const accessLog = fs.createWriteStream(path.join(__dirname, 'log', 'access.log'), { flags: 'a' })
-app.use(logger('combined', { stream: accessLog })) // 打印到acesslog
+const accessLog = fs.createWriteStream(path.join(__dirname, 'log', 'access.log'), {
+    flags: 'a'
+})
+app.use(logger('combined', {
+    stream: accessLog
+})) // 打印到acesslog
 app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
-app.use(cookieParser())// 使用cookie
+app.use(express.urlencoded({
+    extended: false
+}))
+app.use(cookieParser()) // 使用cookie
 
 // session的原理就是通过纪录cookie来传递的
 const redisClient = require('./utils/rediscon.js')
