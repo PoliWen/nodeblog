@@ -37,7 +37,7 @@ function removeGitkeep(url) {
             if (!ignoreDir.includes(dirent.name) && dirent.isDirectory()) {
                 removeGitkeep(url + '/' + dirent.name)
             } else if (!ignoreDir.includes(dirent.name) && dirent.isFile() && dirent.name == '.gitkeep') {
-                fs.unlink(url + '/' + dirent.name, function(err) {
+                fs.unlink(url + '/' + dirent.name, function (err) {
                     err && console.log(err)
                     console.log('删除', url + '/' + dirent.name, '成功')
                 })
